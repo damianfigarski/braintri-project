@@ -49,7 +49,7 @@ public class EmployeeController {
 
     @GetMapping("/filtered-employees")
     public List<Employee> getFilteredEmployees(@RequestParam("search") String search) {
-        return employeeRepository.findByFirstNameLastNameEmail(search);
+        return employeeRepository.findByFirstNameLastNameEmail(search.toUpperCase());
     }
 
     @PostMapping("create-position")
