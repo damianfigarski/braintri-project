@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://guarded-taiga-38903.herokuapp.com")
+@CrossOrigin(origins = "https://eager-jennings-175905.netlify.com")
 public class EmployeeController {
 
     private EmployeeRepository employeeRepository;
