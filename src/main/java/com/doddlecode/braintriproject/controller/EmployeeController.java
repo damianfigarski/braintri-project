@@ -23,9 +23,9 @@ public class EmployeeController {
     @PostMapping("/create")
     public Employee create(@RequestBody Employee employee) {
         if (employee != null) {
-            Position position = positionRepository.findByPositionName(
-                    employee.getPosition().getPositionName()
-            );
+            Position position = positionRepository.findById(
+                    employee.getPosition().getId()
+            ).get();
             employee.setPosition(position);
             return employeeRepository.save(employee);
         }
@@ -35,7 +35,8 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
-        return employeeRepository.findAll();
+        List<Employee> list = employeeRepository.findAll();
+        return list;
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
@@ -53,6 +54,9 @@ public class EmployeeController {
 
     @PostMapping("create-position")
     public Position createPosition(@RequestBody Position position) {
+        if (positionRepository.findByPositionName(position.getPositionName()) != null) {
+            return null;
+        }
         if (position != null) {
             return positionRepository.save(position);
         }

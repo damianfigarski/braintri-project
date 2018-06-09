@@ -1,17 +1,15 @@
 package com.doddlecode.braintriproject.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 public class Employee {
     @Id
     @GeneratedValue
@@ -20,6 +18,7 @@ public class Employee {
     private String lastName;
     private String email;
     @ManyToOne
+    @JsonIgnoreProperties(value = "employeeList", allowSetters = true)
     private Position position;
 
     public Employee(Long id, String firstName, String lastName, String email, Position position) {
