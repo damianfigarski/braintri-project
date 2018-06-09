@@ -10,6 +10,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-    @Query("SELECT e FROM Employee e WHERE e.firstName LIKE %?1% OR e.lastName LIKE %?1% OR e.email LIKE %?1%")
+    @Query("SELECT e FROM Employee e WHERE upper(e.firstName) LIKE %upper(?1)% OR upper(e.lastName) LIKE %upper(?1)% OR upper(e.email) LIKE %upper(?1)%")
     List<Employee> findByFirstNameLastNameEmail(String param);
 }
